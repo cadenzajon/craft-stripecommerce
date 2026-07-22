@@ -118,7 +118,7 @@ return [
 </form>
 ```
 
-The visitor is redirected to Stripe Checkout with the per-tier prices, pays, and returns to your thank-you page.
+Stripe Checkout shows the tier-resolved prices, takes payment, and sends the visitor back to your thank-you page.
 
 ## Architecture
 
@@ -143,7 +143,7 @@ Catalog path (read-only, no Stripe calls):
 Stripe Dashboard ──sync (official plugin)──▶ Craft elements ──▶ Twig templates
 ```
 
-No page render calls the Stripe API. The catalog is local Craft data. Stripe is contacted once per purchase, at the checkout click.
+No page render calls the Stripe API, because the catalog is local Craft data. The server contacts Stripe once per purchase, at the checkout click.
 
 ## Roadmap
 
