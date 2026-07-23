@@ -29,6 +29,8 @@ class Settings extends Model
      * - shippingCountries: string[] — ISO country codes; enables shipping address collection
      * - shippingOptions: string[] — Stripe shipping rate IDs (shr_...) to offer at checkout
      * - allowPromotionCodes: bool
+     * - automaticTax: bool — enable Stripe Tax on the session (register nexus and set
+     *   product tax codes in the Stripe Dashboard)
      *
      * @var array<string, mixed>
      */
