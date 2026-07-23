@@ -45,6 +45,9 @@ class Checkout extends Component
         if (!empty($settings['allowPromotionCodes'])) {
             $params['allow_promotion_codes'] = true;
         }
+        if (!empty($settings['automaticTax'])) {
+            $params['automatic_tax'] = ['enabled' => true];
+        }
         if (!empty($settings['shippingOptions'])) {
             $params['shipping_options'] = array_map(
                 fn(string $rateId) => ['shipping_rate' => $rateId],

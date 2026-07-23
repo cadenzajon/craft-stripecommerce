@@ -90,6 +90,7 @@ return [
         'shippingCountries' => ['US', 'CA'],   // collect a shipping address
         'shippingOptions' => ['shr_123'],       // Stripe shipping rate IDs
         'allowPromotionCodes' => true,
+        'automaticTax' => true,                  // turn on Stripe Tax at checkout
     ],
 ];
 ```
@@ -103,7 +104,9 @@ Two events let a site module hook in:
 
 Stripe handles both; the plugin computes neither.
 
-Create shipping rates in the [Stripe Dashboard](https://dashboard.stripe.com/shipping-rates) (flat amounts, free shipping, delivery estimates), then list their IDs in `checkout.shippingOptions`. Stripe shows them at checkout, the customer picks one, and the cost is added to the total. Enable [Stripe Tax](https://docs.stripe.com/tax/checkout) for automatic tax, including tax on shipping.
+Create shipping rates in the [Stripe Dashboard](https://dashboard.stripe.com/shipping-rates) (flat amounts, free shipping, delivery estimates), then list their IDs in `checkout.shippingOptions`. Stripe shows them at checkout, the customer picks one, and the cost is added to the total.
+
+Set `checkout.automaticTax => true` to turn on [Stripe Tax](https://docs.stripe.com/tax/checkout) for the session; Stripe then calculates and collects tax at checkout, including tax on shipping. The plugin only flips the switch — register your nexus and assign product tax codes (books are exempt or reduced in some states) in the Stripe Dashboard. Tax needs an address, so also set `checkout.shippingCountries`.
 
 Stripe's built-in shipping rates are a fixed amount per order. If you need rates that change with the delivery address or order total (for example free shipping over $50, or weight-based pricing), compute a rate in a `beforeCheckout` handler — your handler has the cart and can set `shipping_options` on the session params. Stripe's own [dynamic shipping options](https://docs.stripe.com/payments/checkout/custom-shipping-options) go further but require embedded checkout rather than the hosted redirect this plugin uses.
 
