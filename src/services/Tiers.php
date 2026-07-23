@@ -27,6 +27,9 @@ class Tiers extends Component
     public function getActiveTier(): string
     {
         $settings = Plugin::getInstance()->getSettings();
+        if (!$settings->tiers) {
+            return '';
+        }
         $tier = null;
 
         if (!Craft::$app->getRequest()->getIsConsoleRequest()) {
@@ -82,6 +85,9 @@ class Tiers extends Component
     public function resolvePrice(Product $product, ?string $tier = null): ?Price
     {
         $settings = Plugin::getInstance()->getSettings();
+        if (!$settings->tiers) {
+            return $product->getDefaultPrice();
+        }
         $tier ??= $this->getActiveTier();
         $key = $settings->priceTierMetadataKey;
 
