@@ -1,9 +1,9 @@
 <?php
 
-namespace cadenzajon\stripecommerce\services;
+namespace cadenzajon\stripecart\services;
 
-use cadenzajon\stripecommerce\events\ResolveTierEvent;
-use cadenzajon\stripecommerce\Plugin;
+use cadenzajon\stripecart\events\ResolveTierEvent;
+use cadenzajon\stripecart\Plugin;
 use Craft;
 use craft\elements\User;
 use craft\stripe\elements\Price;
@@ -22,7 +22,7 @@ class Tiers extends Component
      */
     public const EVENT_RESOLVE_TIER = 'resolveTier';
 
-    private const SESSION_KEY = 'stripe-commerce:tier';
+    private const SESSION_KEY = 'stripe-cart:tier';
 
     public function getActiveTier(): string
     {

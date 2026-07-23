@@ -1,6 +1,6 @@
 <?php
 
-namespace cadenzajon\stripecommerce\console\controllers;
+namespace cadenzajon\stripecart\console\controllers;
 
 use Craft;
 use craft\console\Controller;

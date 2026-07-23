@@ -1,13 +1,13 @@
 <?php
 
-namespace cadenzajon\stripecommerce;
+namespace cadenzajon\stripecart;
 
-use cadenzajon\stripecommerce\events\OrderCompletedEvent;
-use cadenzajon\stripecommerce\models\Settings;
-use cadenzajon\stripecommerce\services\Cart;
-use cadenzajon\stripecommerce\services\Checkout;
-use cadenzajon\stripecommerce\services\Tiers;
-use cadenzajon\stripecommerce\variables\StripeCartVariable;
+use cadenzajon\stripecart\events\OrderCompletedEvent;
+use cadenzajon\stripecart\models\Settings;
+use cadenzajon\stripecart\services\Cart;
+use cadenzajon\stripecart\services\Checkout;
+use cadenzajon\stripecart\services\Tiers;
+use cadenzajon\stripecart\variables\StripeCartVariable;
 use Craft;
 use craft\base\Model;
 use craft\base\Plugin as BasePlugin;
@@ -43,9 +43,9 @@ class Plugin extends BasePlugin
         parent::init();
 
         if (Craft::$app->getRequest()->getIsConsoleRequest()) {
-            $this->controllerNamespace = 'cadenzajon\\stripecommerce\\console\\controllers';
+            $this->controllerNamespace = 'cadenzajon\\stripecart\\console\\controllers';
         } else {
-            $this->controllerNamespace = 'cadenzajon\\stripecommerce\\controllers';
+            $this->controllerNamespace = 'cadenzajon\\stripecart\\controllers';
         }
 
         Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $event) {

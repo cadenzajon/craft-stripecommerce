@@ -1,8 +1,8 @@
 <?php
 
-namespace cadenzajon\stripecommerce\controllers;
+namespace cadenzajon\stripecart\controllers;
 
-use cadenzajon\stripecommerce\Plugin;
+use cadenzajon\stripecart\Plugin;
 use craft\web\Controller;
 use yii\web\Response;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace cadenzajon\stripecommerce\services;
+namespace cadenzajon\stripecart\services;
 
-use cadenzajon\stripecommerce\models\CartItem;
-use cadenzajon\stripecommerce\Plugin;
+use cadenzajon\stripecart\models\CartItem;
+use cadenzajon\stripecart\Plugin;
 use Craft;
 use craft\stripe\elements\Product;
 use yii\base\Component;
@@ -14,7 +14,7 @@ use yii\base\Component;
  */
 class Cart extends Component
 {
-    private const SESSION_KEY = 'stripe-commerce:cart';
+    private const SESSION_KEY = 'stripe-cart:cart';
 
     /**
      * @return array<int, int> productId => qty

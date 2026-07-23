@@ -1,9 +1,9 @@
 <?php
 
-namespace cadenzajon\stripecommerce\services;
+namespace cadenzajon\stripecart\services;
 
-use cadenzajon\stripecommerce\events\CheckoutEvent;
-use cadenzajon\stripecommerce\Plugin;
+use cadenzajon\stripecart\events\CheckoutEvent;
+use cadenzajon\stripecart\Plugin;
 use craft\helpers\UrlHelper;
 use craft\stripe\Plugin as StripePlugin;
 use yii\base\Component;

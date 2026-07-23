@@ -1,5 +1,5 @@
 {
-    "name": "cadenzajon/craft-stripecommerce",
+    "name": "cadenzajon/craft-stripecart",
     "description": "Session cart and Stripe Checkout for Craft CMS, with configurable pricing tiers",
     "type": "craft-plugin",
     "license": "MIT",
@@ -10,14 +10,14 @@
     },
     "autoload": {
         "psr-4": {
-            "cadenzajon\\stripecommerce\\": "src/"
+            "cadenzajon\\stripecart\\": "src/"
         }
     },
     "extra": {
-        "handle": "stripe-commerce",
-        "name": "Stripe Commerce",
+        "handle": "stripe-cart",
+        "name": "Stripe Cart",
         "developer": "cadenzajon",
-        "class": "cadenzajon\\stripecommerce\\Plugin"
+        "class": "cadenzajon\\stripecart\\Plugin"
     },
     "config": {
         "allow-plugins": {

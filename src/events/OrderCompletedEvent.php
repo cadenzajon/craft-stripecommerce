@@ -1,6 +1,6 @@
 <?php
 
-namespace cadenzajon\stripecommerce\events;
+namespace cadenzajon\stripecart\events;
 
 use yii\base\Event;
 

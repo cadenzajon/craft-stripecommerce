@@ -1,4 +1,4 @@
-# Stripe Commerce for Craft CMS
+# Stripe Cart for Craft CMS
 
 A session cart and Stripe Checkout for Craft CMS 5. Your products and prices live in Stripe; this plugin syncs them into Craft, holds a cart in the session, and hands off to Stripe Checkout. No Craft Commerce license, no JavaScript framework, no build step.
 
@@ -14,8 +14,8 @@ It builds on the free [`craftcms/stripe`](https://plugins.craftcms.com/stripe) p
 ## Install
 
 ```bash
-composer require cadenzajon/craft-stripecommerce
-php craft plugin/install stripe-commerce
+composer require cadenzajon/craft-stripecart
+php craft plugin/install stripe-cart
 ```
 
 Set your Stripe secret key in `.env` (the official plugin reads it):
@@ -31,7 +31,7 @@ Three steps: sync your catalog, add a cart button, add a checkout button. No con
 **1. Sync products and prices from Stripe:**
 
 ```bash
-php craft stripe-commerce/sync
+php craft stripe-cart/sync
 ```
 
 **2. Add-to-cart button on a product page** (products are `craftcms/stripe` elements):
@@ -39,7 +39,7 @@ php craft stripe-commerce/sync
 ```twig
 <form method="post">
   {{ csrfInput() }}
-  {{ actionInput('stripe-commerce/cart/add') }}
+  {{ actionInput('stripe-cart/cart/add') }}
   {{ hiddenInput('productId', product.id) }}
   <button>Add to cart</button>
 </form>
@@ -54,7 +54,7 @@ php craft stripe-commerce/sync
 
 <form method="post">
   {{ csrfInput() }}
-  {{ actionInput('stripe-commerce/checkout') }}
+  {{ actionInput('stripe-cart/checkout') }}
   <button>Check out</button>
 </form>
 ```
@@ -71,16 +71,16 @@ That's the whole store. Each product sells at its default Stripe price, and Stri
 
 Actions (POST `productId` and `qty`; they redirect back, or return JSON when the request sends `Accept: application/json`):
 
-- `stripe-commerce/cart/add`
-- `stripe-commerce/cart/update`
-- `stripe-commerce/cart/remove`
-- `stripe-commerce/cart/clear`
+- `stripe-cart/cart/add`
+- `stripe-cart/cart/update`
+- `stripe-cart/cart/remove`
+- `stripe-cart/cart/clear`
 
 ## Checkout
 
-`stripe-commerce/checkout` turns the cart into a Stripe Checkout Session and redirects the customer to Stripe. After payment they return to your success URL, and the cart clears.
+`stripe-cart/checkout` turns the cart into a Stripe Checkout Session and redirects the customer to Stripe. After payment they return to your success URL, and the cart clears.
 
-Everything below is optional. Configure it in `config/stripe-commerce.php`:
+Everything below is optional. Configure it in `config/stripe-cart.php`:
 
 ```php
 return [
@@ -110,16 +110,16 @@ Stripe's built-in shipping rates are a fixed amount per order. If you need rates
 ## Sync
 
 ```bash
-php craft stripe-commerce/sync
+php craft stripe-cart/sync
 ```
 
 Pulls every product and price from Stripe. Safe to re-run. To keep the catalog current automatically, subscribe a webhook once:
 
 ```bash
-php craft stripe-commerce/webhooks/subscribe https://your-site.com/stripe/webhooks/handle
+php craft stripe-cart/webhooks/subscribe https://your-site.com/stripe/webhooks/handle
 ```
 
-This creates the endpoint on Stripe and stores the signing secret where the official plugin expects it. Also available: `stripe-commerce/webhooks/status` and `stripe-commerce/webhooks/unsubscribe`.
+This creates the endpoint on Stripe and stores the signing secret where the official plugin expects it. Also available: `stripe-cart/webhooks/status` and `stripe-cart/webhooks/unsubscribe`.
 
 ## Pricing tiers (optional)
 
@@ -130,7 +130,7 @@ Give each product one price per tier in Stripe, tagged with price metadata (defa
 - the retail price gets metadata `tier` = `retail`
 - the wholesale price gets metadata `tier` = `wholesale`
 
-Then define the tiers in `config/stripe-commerce.php`:
+Then define the tiers in `config/stripe-cart.php`:
 
 ```php
 return [
@@ -143,7 +143,7 @@ return [
 
 The `default` tier applies to everyone. Other tiers activate per session in one of three ways:
 
-- **Access code** — POST to `stripe-commerce/tiers/activate` with an `accessCode` field. Works on Craft Solo, which has no front-end users. POST to `stripe-commerce/tiers/deactivate` to revert.
+- **Access code** — POST to `stripe-cart/tiers/activate` with an `accessCode` field. Works on Craft Solo, which has no front-end users. POST to `stripe-cart/tiers/deactivate` to revert.
 - **User group** (Craft Pro) — add `'userGroup' => 'trade'` to a tier; members of that group get it automatically.
 - **`resolveTier` event** — for anything else (IP allowlist, signed URL, time window).
 
@@ -153,9 +153,9 @@ To store the tier on a different metadata key, set `priceTierMetadataKey`.
 
 ## Events
 
-- `cadenzajon\stripecommerce\services\Tiers::EVENT_RESOLVE_TIER` — override the resolved pricing tier
-- `cadenzajon\stripecommerce\services\Checkout::EVENT_BEFORE_CHECKOUT` — modify line items and session params
-- `cadenzajon\stripecommerce\services\Checkout::EVENT_ORDER_COMPLETED` — a checkout completed (from the webhook)
+- `cadenzajon\stripecart\services\Tiers::EVENT_RESOLVE_TIER` — override the resolved pricing tier
+- `cadenzajon\stripecart\services\Checkout::EVENT_BEFORE_CHECKOUT` — modify line items and session params
+- `cadenzajon\stripecart\services\Checkout::EVENT_ORDER_COMPLETED` — a checkout completed (from the webhook)
 
 ## License
 

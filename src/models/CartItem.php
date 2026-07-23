@@ -1,6 +1,6 @@
 <?php
 
-namespace cadenzajon\stripecommerce\models;
+namespace cadenzajon\stripecart\models;
 
 use craft\stripe\elements\Price;
 use craft\stripe\elements\Product;

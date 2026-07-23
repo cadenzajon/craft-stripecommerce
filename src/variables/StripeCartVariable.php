@@ -1,9 +1,9 @@
 <?php
 
-namespace cadenzajon\stripecommerce\variables;
+namespace cadenzajon\stripecart\variables;
 
-use cadenzajon\stripecommerce\models\CartItem;
-use cadenzajon\stripecommerce\Plugin;
+use cadenzajon\stripecart\models\CartItem;
+use cadenzajon\stripecart\Plugin;
 use craft\stripe\elements\Price;
 use craft\stripe\elements\Product;
 
